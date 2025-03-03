@@ -48,7 +48,12 @@ export const ShapesBar: FC<IProps> = (props) => {
       >
         <MousePointer size={20} />
       </Button>
-      <Button variant="outline" size="icon" className="cursor-pointer">
+      <Button
+        variant="outline"
+        size="icon"
+        className="cursor-pointer"
+        onClick={() => handleClick("square")}
+      >
         <Square size={20} />
       </Button>
       <Button variant="outline" size="icon" className="cursor-pointer">

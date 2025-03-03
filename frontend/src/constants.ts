@@ -1,0 +1,2 @@
+export const RESIZABLE_NODE_MIN_WIDTH = 100;
+export const RESIZABLE_NODE_MIN_HEIGHT = 100;

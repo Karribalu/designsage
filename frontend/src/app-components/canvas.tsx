@@ -18,6 +18,11 @@ import { ShapesBar } from "./shapes-bar/shapesBar";
 import { useAppDispatch, useAppSelector } from "@/app/hooks";
 import { setSelectedNodeType } from "@/store/canvas/nodeDropReducer";
 import { v4 as uuidv4 } from "uuid";
+import { ResizableSquare } from "./resizable-nodes/square";
+import {
+  RESIZABLE_NODE_MIN_HEIGHT,
+  RESIZABLE_NODE_MIN_WIDTH,
+} from "@/constants";
 
 interface IProps {}
 
@@ -36,7 +41,7 @@ const initialNodes: Node[] = [
   },
 ];
 const initialEdges = [{ id: "e1-2", source: "1", target: "2" }];
-const nodeTypes = { circle: ResizableCircle };
+const nodeTypes = { circle: ResizableCircle, square: ResizableSquare };
 
 const CanvasComponent: FC<IProps> = (_) => {
   const [nodes, setNodes] = useNodesState(initialNodes);
@@ -62,8 +67,12 @@ const CanvasComponent: FC<IProps> = (_) => {
       let newNode = {
         id: uuidv4(),
         position: { x: event.clientX, y: event.clientY },
-        data: { label: "circle", height: 100, width: 100 },
-        type: "circle",
+        data: {
+          label: nodeType,
+          height: RESIZABLE_NODE_MIN_HEIGHT,
+          width: RESIZABLE_NODE_MIN_WIDTH,
+        },
+        type: nodeType,
       };
       setNodes((nodes) => nodes.concat(newNode));
       dispatch(setSelectedNodeType(null));

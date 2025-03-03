@@ -1,5 +1,4 @@
 "use client";
-import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "@xyflow/react/dist/style.css";
 import "./globals.css";
@@ -15,6 +14,18 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+if (typeof window !== "undefined") {
+  // Client-side-only code
+  window.addEventListener("error", function (e) {
+    if (
+      e.message ===
+      "ResizeObserver loop completed with undelivered notifications."
+    ) {
+      e.stopImmediatePropagation();
+      e.preventDefault();
+    }
+  });
+}
 
 export default function RootLayout({
   children,

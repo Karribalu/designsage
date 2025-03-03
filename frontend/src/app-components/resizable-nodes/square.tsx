@@ -1,4 +1,6 @@
 "use client";
+import React, { FC, useEffect } from "react";
+import { ResizableNodeProps } from "../types";
 import {
   Handle,
   NodeResizer,
@@ -6,8 +8,6 @@ import {
   ResizeDragEvent,
   ResizeParamsWithDirection,
 } from "@xyflow/react";
-import React, { FC, useEffect } from "react";
-import { ResizableNodeProps } from "../types";
 import {
   RESIZABLE_NODE_MIN_HEIGHT,
   RESIZABLE_NODE_MIN_WIDTH,
@@ -15,12 +15,12 @@ import {
 
 /**
  * @author
- * @function @ResizableCircle
+ * @function @Square
  **/
 
-export const ResizableCircle: FC<ResizableNodeProps> = ({ selected, data }) => {
+export const ResizableSquare: FC<ResizableNodeProps> = ({ selected, data }) => {
   useEffect(() => {
-    console.log("data ", data);
+    console.log("square data ", data);
   }, []);
   const handleOnResize = (
     _: ResizeDragEvent,
@@ -34,17 +34,16 @@ export const ResizableCircle: FC<ResizableNodeProps> = ({ selected, data }) => {
       <NodeResizer
         color="blue"
         isVisible={selected}
-        onResize={handleOnResize}
         minWidth={RESIZABLE_NODE_MIN_WIDTH}
         minHeight={RESIZABLE_NODE_MIN_HEIGHT}
+        onResize={handleOnResize}
       />
       <Handle type="target" position={Position.Left} />
       <div
         style={{
           width: data.width,
           height: data.height,
-          borderRadius: "50%",
-          backgroundColor: data.color || "rgba(255, 0, 0, 0.5)",
+          backgroundColor: data.color || "rgba(0, 0, 255, 0.5)",
           border: selected ? "2px solid #555" : "1px solid #222",
           display: "flex",
           justifyContent: "center",
@@ -58,4 +57,4 @@ export const ResizableCircle: FC<ResizableNodeProps> = ({ selected, data }) => {
   );
 };
 
-export default ResizableCircle;
+export default ResizableSquare;
