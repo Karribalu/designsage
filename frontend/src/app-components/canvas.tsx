@@ -23,6 +23,7 @@ import {
   RESIZABLE_NODE_MIN_HEIGHT,
   RESIZABLE_NODE_MIN_WIDTH,
 } from "@/constants";
+import ResizableCylinder from "./resizable-nodes/cylinder";
 
 interface IProps {}
 
@@ -36,12 +37,16 @@ const initialNodes: Node[] = [
   {
     id: "3",
     position: { x: 0, y: 300 },
-    data: { label: "circle", height: 100, width: 100 },
-    type: "circle",
+    data: { label: "cylinder", height: 100, width: 100, color: "blue" },
+    type: "cylinder",
   },
 ];
 const initialEdges = [{ id: "e1-2", source: "1", target: "2" }];
-const nodeTypes = { circle: ResizableCircle, square: ResizableSquare };
+const nodeTypes = {
+  circle: ResizableCircle,
+  square: ResizableSquare,
+  cylinder: ResizableCylinder,
+};
 
 const CanvasComponent: FC<IProps> = (_) => {
   const [nodes, setNodes] = useNodesState(initialNodes);

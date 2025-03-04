@@ -14,6 +14,7 @@ import {
   Type,
   Image,
   Shapes,
+  Cylinder,
 } from "lucide-react";
 import React, { FC, useEffect } from "react";
 
@@ -44,14 +45,6 @@ export const ShapesBar: FC<IProps> = (props) => {
         variant="outline"
         size="icon"
         className="cursor-pointer"
-        onClick={() => handleClick("mousePointer")}
-      >
-        <MousePointer size={20} />
-      </Button>
-      <Button
-        variant="outline"
-        size="icon"
-        className="cursor-pointer"
         onClick={() => handleClick("square")}
       >
         <Square size={20} />
@@ -66,6 +59,14 @@ export const ShapesBar: FC<IProps> = (props) => {
         onClick={() => handleClick("circle")}
       >
         <Circle size={20} />
+      </Button>
+      <Button
+        variant="outline"
+        size="icon"
+        className="cursor-pointer"
+        onClick={() => handleClick("cylinder")}
+      >
+        <Cylinder size={20} />
       </Button>
       <Button variant="outline" size="icon" className="cursor-pointer">
         <ArrowRight size={20} />
