@@ -29,6 +29,8 @@ export const ResizableCircle: FC<ResizableNodeProps> = ({ selected, data }) => {
     data.height = params.height;
     data.width = params.width;
   };
+  const viewBoxWidth = data.width;
+  const viewBoxHeight = data.height;
   return (
     <>
       <NodeResizer
@@ -39,19 +41,33 @@ export const ResizableCircle: FC<ResizableNodeProps> = ({ selected, data }) => {
         minHeight={RESIZABLE_NODE_MIN_HEIGHT}
       />
       <Handle type="target" position={Position.Left} />
-      <div
-        style={{
-          width: data.width,
-          height: data.height,
-          borderRadius: "50%",
-          backgroundColor: data.color || "rgba(255, 0, 0, 0.5)",
-          border: selected ? "2px solid #555" : "1px solid #222",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        {data.label}
+      <div className="w-full">
+        <svg
+          viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`}
+          className="w-full "
+        >
+          <ellipse
+            cx={viewBoxWidth / 2}
+            cy={viewBoxHeight / 2}
+            rx={data.width / 2}
+            ry={data.height / 2}
+            fill={data.color}
+            stroke={data.color}
+            strokeWidth="2"
+          />
+
+          <text
+            x={viewBoxWidth / 2}
+            y={viewBoxHeight / 2}
+            textAnchor="middle"
+            dominantBaseline="middle"
+            fill={data.color}
+            fontWeight="bold"
+            fontSize={Math.min(data.width, data.height) / 6}
+          >
+            {data.label}
+          </text>
+        </svg>
       </div>
       <Handle type="source" position={Position.Right} />
     </>

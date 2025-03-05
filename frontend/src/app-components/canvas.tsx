@@ -20,6 +20,8 @@ import { setSelectedNodeType } from "@/store/canvas/nodeDropReducer";
 import { v4 as uuidv4 } from "uuid";
 import { ResizableSquare } from "./resizable-nodes/square";
 import {
+  RESIZABLE_CYLINDER_NODE_MIN_HEIGHT,
+  RESIZABLE_CYLINDER_NODE_MIN_WIDTH,
   RESIZABLE_NODE_MIN_HEIGHT,
   RESIZABLE_NODE_MIN_WIDTH,
 } from "@/constants";
@@ -69,16 +71,32 @@ const CanvasComponent: FC<IProps> = (_) => {
     if (nodeType != null) {
       console.log("Adding a new circle");
 
-      let newNode = {
-        id: uuidv4(),
-        position: { x: event.clientX, y: event.clientY },
-        data: {
-          label: nodeType,
-          height: RESIZABLE_NODE_MIN_HEIGHT,
-          width: RESIZABLE_NODE_MIN_WIDTH,
-        },
-        type: nodeType,
-      };
+      let newNode = null;
+      if (nodeType === "cylinder") {
+        newNode = {
+          id: uuidv4(),
+          position: { x: event.clientX, y: event.clientY },
+          data: {
+            label: nodeType,
+            height: RESIZABLE_CYLINDER_NODE_MIN_HEIGHT,
+            width: RESIZABLE_CYLINDER_NODE_MIN_WIDTH,
+            color: "#EBC347",
+          },
+          type: nodeType,
+        };
+      } else {
+        newNode = {
+          id: uuidv4(),
+          position: { x: event.clientX, y: event.clientY },
+          data: {
+            label: nodeType,
+            height: RESIZABLE_NODE_MIN_HEIGHT,
+            width: RESIZABLE_NODE_MIN_WIDTH,
+            color: "#EBC347",
+          },
+          type: nodeType,
+        };
+      }
       setNodes((nodes) => nodes.concat(newNode));
       dispatch(setSelectedNodeType(null));
     }

@@ -57,6 +57,7 @@ export const ShapesBar: FC<IProps> = (props) => {
         size="icon"
         className="cursor-pointer"
         onClick={() => handleClick("circle")}
+        draggable
       >
         <Circle size={20} />
       </Button>
