@@ -1,5 +1,6 @@
 "use client";
 import {
+  addEdge,
   applyNodeChanges,
   Background,
   BackgroundVariant,
@@ -7,14 +8,17 @@ import {
   Edge,
   Node,
   NodeChange,
+  OnConnect,
   Panel,
   ReactFlow,
   useNodesState,
+  MarkerType,
+  ConnectionLineType,
 } from "@xyflow/react";
 
 import React, { FC, useCallback, useEffect, useState } from "react";
 import { ResizableCircle } from "./resizable-nodes/circle";
-import { ShapesBar } from "./shapes-bar/shapesBar";
+import { ShapesBar } from "../shapes-bar/shapesBar";
 import { useAppDispatch, useAppSelector } from "@/app/hooks";
 import { setSelectedNodeType } from "@/store/canvas/nodeDropReducer";
 import { v4 as uuidv4 } from "uuid";
@@ -26,6 +30,7 @@ import {
   RESIZABLE_NODE_MIN_WIDTH,
 } from "@/constants";
 import ResizableCylinder from "./resizable-nodes/cylinder";
+import ForwardEdge from "./edges/forward-edge";
 
 interface IProps {}
 
@@ -34,8 +39,6 @@ interface IProps {}
  * @function @CanvasComponent
  **/
 const initialNodes: Node[] = [
-  { id: "1", position: { x: 0, y: 0 }, data: { label: "1" } },
-  { id: "2", position: { x: 0, y: 100 }, data: { label: "2" } },
   {
     id: "3",
     position: { x: 0, y: 300 },
@@ -43,13 +46,29 @@ const initialNodes: Node[] = [
     type: "cylinder",
   },
 ];
-const initialEdges = [{ id: "e1-2", source: "1", target: "2" }];
+const initialEdges: Edge[] = [
+  {
+    id: "e1-2",
+    source: "1",
+    target: "2",
+    type: "forward",
+    markerEnd: { type: MarkerType.Arrow },
+  },
+];
 const nodeTypes = {
   circle: ResizableCircle,
   square: ResizableSquare,
   cylinder: ResizableCylinder,
 };
 
+const edgeTypes = {
+  forward: ForwardEdge,
+};
+let i = 0;
+let getEdgeId = () => {
+  i++;
+  return `edge-${i}`;
+};
 const CanvasComponent: FC<IProps> = (_) => {
   const [nodes, setNodes] = useNodesState(initialNodes);
   const [edges, setEdges] = useState<Edge[]>(initialEdges);
@@ -66,6 +85,10 @@ const CanvasComponent: FC<IProps> = (_) => {
       setNodes((nodes) => applyNodeChanges(changes, nodes));
     },
     [setNodes]
+  );
+  const onConnect: OnConnect = useCallback(
+    (params) => setEdges((eds) => addEdge(params, eds)),
+    []
   );
   const onClick = (event: React.MouseEvent) => {
     if (nodeType != null) {
@@ -86,7 +109,7 @@ const CanvasComponent: FC<IProps> = (_) => {
         };
       } else {
         newNode = {
-          id: uuidv4(),
+          id: getEdgeId(),
           position: { x: event.clientX, y: event.clientY },
           data: {
             label: nodeType,
@@ -102,14 +125,30 @@ const CanvasComponent: FC<IProps> = (_) => {
     }
     console.log("I am onlcick ", event.clientX, " ", event.clientY);
   };
+  const onEdgeDoubleClick = (event: React.MouseEvent, edge: Edge) => {
+    console.log("I am on edge double click ", event, edge);
+  };
   return (
     <div style={{ width: "100vw", height: "100vh" }}>
       <ReactFlow
         nodes={nodes}
         edges={edges}
         nodeTypes={nodeTypes}
+        edgeTypes={edgeTypes}
         onNodesChange={onNodesChange}
+        onConnect={onConnect}
         onClick={onClick}
+        defaultEdgeOptions={{
+          type: "forward",
+          markerEnd: { type: MarkerType.Arrow, strokeWidth: 1, color: "black" },
+        }}
+        connectionLineType={ConnectionLineType.Straight}
+        connectionLineStyle={{
+          stroke: "black",
+          color: "black",
+          strokeWidth: 1,
+        }}
+        onEdgeDoubleClick={onEdgeDoubleClick}
       >
         <Panel position="top-center">
           <ShapesBar />

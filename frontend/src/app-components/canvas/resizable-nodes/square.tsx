@@ -1,6 +1,6 @@
 "use client";
 import React, { FC, useEffect } from "react";
-import { ResizableNodeProps } from "../types";
+import { ResizableNodeProps } from "../../types";
 import {
   Handle,
   NodeResizer,

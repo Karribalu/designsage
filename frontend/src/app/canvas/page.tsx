@@ -1,5 +1,5 @@
 "use client";
-import CanvasComponent from "@/app-components/canvas";
+import CanvasComponent from "@/app-components/canvas/canvas";
 const Canvas = () => {
   return (
     <>

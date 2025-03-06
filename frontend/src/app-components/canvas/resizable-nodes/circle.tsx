@@ -7,7 +7,7 @@ import {
   ResizeParamsWithDirection,
 } from "@xyflow/react";
 import React, { FC, useEffect } from "react";
-import { ResizableNodeProps } from "../types";
+import { ResizableNodeProps } from "../../types";
 import {
   RESIZABLE_NODE_MIN_HEIGHT,
   RESIZABLE_NODE_MIN_WIDTH,
@@ -29,8 +29,9 @@ export const ResizableCircle: FC<ResizableNodeProps> = ({ selected, data }) => {
     data.height = params.height;
     data.width = params.width;
   };
-  const viewBoxWidth = data.width;
-  const viewBoxHeight = data.height;
+  const padding = 3;
+  const viewBoxWidth = data.width + padding;
+  const viewBoxHeight = data.height + padding;
   return (
     <>
       <NodeResizer
@@ -61,7 +62,7 @@ export const ResizableCircle: FC<ResizableNodeProps> = ({ selected, data }) => {
             y={viewBoxHeight / 2}
             textAnchor="middle"
             dominantBaseline="middle"
-            fill={data.color}
+            fill={"black"}
             fontWeight="bold"
             fontSize={Math.min(data.width, data.height) / 6}
           >
