@@ -30,7 +30,6 @@ export const ShapesBar: FC<IProps> = (props) => {
   const { nodeType } = useAppSelector((store) => store.nodeDrop);
   const dispatch = useAppDispatch();
   const handleClick = (shape: string) => {
-    console.log("I am clicked ", shape);
     dispatch(setSelectedNodeType(shape));
   };
   return (

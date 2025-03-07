@@ -1,12 +1,13 @@
 "use client";
 import React, { FC, useEffect } from "react";
-import { ResizableNodeProps } from "../../types";
+import { ResizableNodeData } from "../../types";
 import {
   Handle,
   NodeResizer,
   Position,
   ResizeDragEvent,
   ResizeParamsWithDirection,
+  Node,
 } from "@xyflow/react";
 import {
   RESIZABLE_CYLINDER_NODE_MIN_HEIGHT,
@@ -20,7 +21,7 @@ import {
  * @function @Square
  **/
 
-export const ResizableCylinder: FC<ResizableNodeProps> = ({
+export const ResizableCylinder: FC<Node<ResizableNodeData>> = ({
   selected,
   data,
 }) => {

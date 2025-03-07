@@ -5,9 +5,10 @@ import {
   Position,
   ResizeDragEvent,
   ResizeParamsWithDirection,
+  Node,
 } from "@xyflow/react";
 import React, { FC, useEffect } from "react";
-import { ResizableNodeProps } from "../../types";
+import { ResizableNodeData } from "../../types";
 import {
   RESIZABLE_NODE_MIN_HEIGHT,
   RESIZABLE_NODE_MIN_WIDTH,
@@ -18,10 +19,10 @@ import {
  * @function @ResizableCircle
  **/
 
-export const ResizableCircle: FC<ResizableNodeProps> = ({ selected, data }) => {
-  useEffect(() => {
-    console.log("data ", data);
-  }, []);
+export const ResizableCircle: FC<Node<ResizableNodeData>> = ({
+  selected,
+  data,
+}) => {
   const handleOnResize = (
     _: ResizeDragEvent,
     params: ResizeParamsWithDirection

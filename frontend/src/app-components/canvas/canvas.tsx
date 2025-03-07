@@ -14,6 +14,7 @@ import {
   useNodesState,
   MarkerType,
   ConnectionLineType,
+  NodeTypes,
 } from "@xyflow/react";
 
 import React, { FC, useCallback, useEffect, useState } from "react";
@@ -34,39 +35,36 @@ import ForwardEdge from "./edges/forward-edge";
 import { EdgeSelection } from "./edge-selection/edge-selection";
 import BackwardEdge from "./edges/backward-edge";
 import BiDirectionalEdge from "./edges/bi-directional-edge";
+import mermaidUtility from "../utils/mermaid-utility";
+import { ResizableEdgeData, ResizableNodeData } from "../types";
 interface IProps {}
 
 /**
  * @author
  * @function @CanvasComponent
  **/
-const initialNodes: Node[] = [
+const initialNodes: Node<ResizableNodeData>[] = [
   {
-    id: "3",
+    id: "node-0",
     position: { x: 0, y: 300 },
     data: {
       label: "cylinder",
       height: RESIZABLE_CYLINDER_NODE_MIN_HEIGHT,
       width: RESIZABLE_CYLINDER_NODE_MIN_WIDTH,
       color: "#EBC347",
+      type: "cylinder",
     },
     type: "cylinder",
   },
 ];
-const initialEdges: Edge[] = [
-  {
-    id: "e1-2",
-    source: "1",
-    target: "2",
-    type: "forward",
-    markerEnd: { type: MarkerType.Arrow },
-  },
-];
-const nodeTypes = {
+const initialEdges: Edge<ResizableEdgeData>[] = [];
+
+// FIXME: This is a workaround to fix the type error
+const nodeTypes: NodeTypes = {
   circle: ResizableCircle,
   square: ResizableSquare,
   cylinder: ResizableCylinder,
-};
+} as unknown as NodeTypes;
 
 const edgeTypes = {
   forward: ForwardEdge,
@@ -74,12 +72,13 @@ const edgeTypes = {
   biDirectional: BiDirectionalEdge,
 };
 let i = 0;
-let getEdgeId = () => {
+let getNodeId = () => {
   i++;
-  return `edge-${i}`;
+  return `node-${i}`;
 };
 const CanvasComponent: FC<IProps> = (_) => {
-  const [nodes, setNodes] = useNodesState(initialNodes);
+  const [nodes, setNodes] =
+    useNodesState<Node<ResizableNodeData>>(initialNodes);
   const [edges, setEdges] = useState<Edge[]>(initialEdges);
   const { nodeType } = useAppSelector((state) => state.nodeDrop);
   const [edgeSelection, setEdgeSelection] = useState<Edge | null>(null);
@@ -88,14 +87,19 @@ const CanvasComponent: FC<IProps> = (_) => {
     y: number;
   } | null>(null);
   const dispatch = useAppDispatch();
-
   useEffect(() => {
     console.log("====================================");
-    console.log("I am selected node changed ", nodeType);
+    console.log("I am nodes ", nodes);
     console.log("====================================");
-  }, [nodeType]);
+    const mermaid = mermaidUtility.convertToMermaid(nodes, edges);
+
+    console.log("====================================");
+    console.log("I am mermaid ", mermaid);
+    console.log("====================================");
+  }, [JSON.stringify(nodes), JSON.stringify(edges)]);
+
   const onNodesChange = useCallback(
-    (changes: NodeChange<Node>[]) => {
+    (changes: NodeChange<Node<ResizableNodeData>>[]) => {
       setNodes((nodes) => applyNodeChanges(changes, nodes));
     },
     [setNodes]
@@ -109,25 +113,27 @@ const CanvasComponent: FC<IProps> = (_) => {
       let newNode = null;
       if (nodeType === "cylinder") {
         newNode = {
-          id: getEdgeId(),
+          id: getNodeId(),
           position: { x: event.clientX, y: event.clientY },
           data: {
             label: nodeType,
             height: RESIZABLE_CYLINDER_NODE_MIN_HEIGHT,
             width: RESIZABLE_CYLINDER_NODE_MIN_WIDTH,
             color: "#EBC347",
+            type: nodeType,
           },
           type: nodeType,
         };
       } else {
         newNode = {
-          id: getEdgeId(),
+          id: getNodeId(),
           position: { x: event.clientX, y: event.clientY },
           data: {
             label: nodeType,
             height: RESIZABLE_NODE_MIN_HEIGHT,
             width: RESIZABLE_NODE_MIN_WIDTH,
             color: "#EBC347",
+            type: nodeType,
           },
           type: nodeType,
         };

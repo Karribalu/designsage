@@ -1,7 +1,8 @@
-import { BaseEdge, EdgeProps, getStraightPath } from "@xyflow/react";
-import React, { FC, useEffect } from "react";
+import { ResizableEdgeData } from "@/app-components/types";
+import { BaseEdge, Edge, EdgeProps, getStraightPath } from "@xyflow/react";
+import React, { FC } from "react";
 
-const ForwardEdge: FC<EdgeProps> = ({
+const ForwardEdge: FC<EdgeProps<Edge<ResizableEdgeData>>> = ({
   id,
   sourceX,
   sourceY,

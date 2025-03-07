@@ -1,10 +1,11 @@
 "use client";
 import React, { FC, useEffect } from "react";
-import { ResizableNodeProps } from "../../types";
+import { ResizableNodeData } from "../../types";
 import {
   Handle,
   NodeResizer,
   Position,
+  Node,
   ResizeDragEvent,
   ResizeParamsWithDirection,
 } from "@xyflow/react";
@@ -18,10 +19,10 @@ import {
  * @function @Square
  **/
 
-export const ResizableSquare: FC<ResizableNodeProps> = ({ selected, data }) => {
-  useEffect(() => {
-    console.log("square data ", data);
-  }, []);
+export const ResizableSquare: FC<Node<ResizableNodeData>> = ({
+  selected,
+  data,
+}) => {
   const handleOnResize = (
     _: ResizeDragEvent,
     params: ResizeParamsWithDirection

@@ -1,7 +1,7 @@
-import { BaseEdge, EdgeProps, getStraightPath } from "@xyflow/react";
+import { BaseEdge, Edge, EdgeProps, getStraightPath } from "@xyflow/react";
 import React, { FC } from "react";
-
-const BackwardEdge: FC<EdgeProps> = ({
+import { ResizableEdgeData } from "../../types";
+const BackwardEdge: FC<EdgeProps<Edge<ResizableEdgeData>>> = ({
   sourceX,
   sourceY,
   targetX,
