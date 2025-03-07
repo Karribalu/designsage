@@ -28,7 +28,7 @@ export const ResizableCylinder: FC<ResizableNodeProps> = ({
 
   // The viewBox should match the actual size plus the top and bottom ellipses
   const viewBoxHeight = data.height + ellipseHeight * 2;
-
+  const strokeColor = "black";
   return (
     <div className="relative">
       <NodeResizer
@@ -57,7 +57,7 @@ export const ResizableCylinder: FC<ResizableNodeProps> = ({
             width={data.width}
             height={data.height}
             fill={data.color}
-            stroke="#8A2BE2"
+            stroke={strokeColor}
             strokeWidth="2"
           />
 
@@ -68,7 +68,7 @@ export const ResizableCylinder: FC<ResizableNodeProps> = ({
             rx={data.width / 2}
             ry={ellipseHeight}
             fill={data.color}
-            stroke="#8A2BE2"
+            stroke={strokeColor}
             strokeWidth="2"
           />
 
@@ -79,7 +79,7 @@ export const ResizableCylinder: FC<ResizableNodeProps> = ({
             rx={data.width / 2}
             ry={ellipseHeight}
             fill={data.color}
-            stroke="#8A2BE2"
+            stroke={strokeColor}
             strokeWidth="2"
           />
 

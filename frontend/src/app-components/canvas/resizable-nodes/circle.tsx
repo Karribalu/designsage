@@ -32,6 +32,7 @@ export const ResizableCircle: FC<ResizableNodeProps> = ({ selected, data }) => {
   const padding = 3;
   const viewBoxWidth = data.width + padding;
   const viewBoxHeight = data.height + padding;
+  const strokeColor = "black";
   return (
     <>
       <NodeResizer
@@ -53,8 +54,8 @@ export const ResizableCircle: FC<ResizableNodeProps> = ({ selected, data }) => {
             rx={data.width / 2}
             ry={data.height / 2}
             fill={data.color}
-            stroke={data.color}
-            strokeWidth="2"
+            stroke={strokeColor}
+            strokeWidth="1"
           />
 
           <text

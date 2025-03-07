@@ -1,12 +1,13 @@
 import { BaseEdge, EdgeProps, getStraightPath } from "@xyflow/react";
 import React, { FC } from "react";
 
-const BackwardEdge: FC<EdgeProps> = ({
+const BiDirectionalEdge: FC<EdgeProps> = ({
   sourceX,
   sourceY,
   targetX,
   targetY,
   markerStart,
+  markerEnd,
   style,
 }) => {
   const [edgePath] = getStraightPath({
@@ -15,15 +16,12 @@ const BackwardEdge: FC<EdgeProps> = ({
     targetX,
     targetY,
   });
-  const handleEdgeDoubleClick = (event: React.MouseEvent) => {
-    console.log("I am on edge double click ", event);
-  };
-
   return (
     <>
       <BaseEdge
         path={edgePath}
         markerStart={markerStart}
+        markerEnd={markerEnd}
         style={{
           ...style,
           strokeWidth: 2,
@@ -34,4 +32,4 @@ const BackwardEdge: FC<EdgeProps> = ({
   );
 };
 
-export default BackwardEdge;
+export default BiDirectionalEdge;

@@ -17,9 +17,6 @@ const ForwardEdge: FC<EdgeProps> = ({
     targetX,
     targetY,
   });
-  useEffect(() => {
-    console.log("I am selected ", selected);
-  }, [selected]);
   return (
     <>
       <BaseEdge
@@ -28,7 +25,7 @@ const ForwardEdge: FC<EdgeProps> = ({
         markerEnd={markerEnd}
         style={{
           ...style,
-          strokeWidth: selected ? 2 : 1,
+          strokeWidth: 2,
           stroke: selected ? "red" : "black",
         }}
       />

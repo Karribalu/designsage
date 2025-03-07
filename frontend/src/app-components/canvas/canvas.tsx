@@ -31,7 +31,9 @@ import {
 } from "@/constants";
 import ResizableCylinder from "./resizable-nodes/cylinder";
 import ForwardEdge from "./edges/forward-edge";
-
+import { EdgeSelection } from "./edge-selection/edge-selection";
+import BackwardEdge from "./edges/backward-edge";
+import BiDirectionalEdge from "./edges/bi-directional-edge";
 interface IProps {}
 
 /**
@@ -42,7 +44,12 @@ const initialNodes: Node[] = [
   {
     id: "3",
     position: { x: 0, y: 300 },
-    data: { label: "cylinder", height: 100, width: 100, color: "blue" },
+    data: {
+      label: "cylinder",
+      height: RESIZABLE_CYLINDER_NODE_MIN_HEIGHT,
+      width: RESIZABLE_CYLINDER_NODE_MIN_WIDTH,
+      color: "#EBC347",
+    },
     type: "cylinder",
   },
 ];
@@ -63,6 +70,8 @@ const nodeTypes = {
 
 const edgeTypes = {
   forward: ForwardEdge,
+  backward: BackwardEdge,
+  biDirectional: BiDirectionalEdge,
 };
 let i = 0;
 let getEdgeId = () => {
@@ -73,6 +82,11 @@ const CanvasComponent: FC<IProps> = (_) => {
   const [nodes, setNodes] = useNodesState(initialNodes);
   const [edges, setEdges] = useState<Edge[]>(initialEdges);
   const { nodeType } = useAppSelector((state) => state.nodeDrop);
+  const [edgeSelection, setEdgeSelection] = useState<Edge | null>(null);
+  const [edgeSelectionPosition, setEdgeSelectionPosition] = useState<{
+    x: number;
+    y: number;
+  } | null>(null);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -92,12 +106,10 @@ const CanvasComponent: FC<IProps> = (_) => {
   );
   const onClick = (event: React.MouseEvent) => {
     if (nodeType != null) {
-      console.log("Adding a new circle");
-
       let newNode = null;
       if (nodeType === "cylinder") {
         newNode = {
-          id: uuidv4(),
+          id: getEdgeId(),
           position: { x: event.clientX, y: event.clientY },
           data: {
             label: nodeType,
@@ -123,10 +135,22 @@ const CanvasComponent: FC<IProps> = (_) => {
       setNodes((nodes) => nodes.concat(newNode));
       dispatch(setSelectedNodeType(null));
     }
-    console.log("I am onlcick ", event.clientX, " ", event.clientY);
   };
   const onEdgeDoubleClick = (event: React.MouseEvent, edge: Edge) => {
     console.log("I am on edge double click ", event, edge);
+  };
+  const onEdgeClick = (event: React.MouseEvent, edge: Edge) => {
+    setEdgeSelection(edge);
+    setEdgeSelectionPosition({ x: event.clientX, y: event.clientY });
+  };
+
+  const onPaneClick = (event: React.MouseEvent) => {
+    setEdgeSelection(null);
+    setEdgeSelectionPosition(null);
+  };
+  const handleEdgeTypeChange = (edge: Edge, type: string) => {
+    edge.type = type;
+    setEdges((eds) => eds.map((e) => (e.id === edge.id ? edge : e)));
   };
   return (
     <div style={{ width: "100vw", height: "100vh" }}>
@@ -140,19 +164,37 @@ const CanvasComponent: FC<IProps> = (_) => {
         onClick={onClick}
         defaultEdgeOptions={{
           type: "forward",
-          markerEnd: { type: MarkerType.Arrow, strokeWidth: 1, color: "black" },
+          markerEnd: { type: MarkerType.Arrow, strokeWidth: 3, color: "black" },
+          markerStart: {
+            type: MarkerType.Arrow,
+            strokeWidth: 3,
+            color: "black",
+          },
         }}
         connectionLineType={ConnectionLineType.Straight}
         connectionLineStyle={{
           stroke: "black",
           color: "black",
-          strokeWidth: 1,
+          strokeWidth: 2,
         }}
         onEdgeDoubleClick={onEdgeDoubleClick}
+        onEdgeClick={onEdgeClick}
+        onPaneClick={onPaneClick}
       >
         <Panel position="top-center">
           <ShapesBar />
         </Panel>
+        {edgeSelection && (
+          <EdgeSelection
+            edge={edgeSelection}
+            onEdgeTypeChange={handleEdgeTypeChange}
+            style={{
+              position: "absolute",
+              top: 100,
+              right: 50,
+            }}
+          />
+        )}
         <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
         <Controls />
       </ReactFlow>
