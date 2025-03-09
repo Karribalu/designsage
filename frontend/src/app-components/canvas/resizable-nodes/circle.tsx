@@ -57,7 +57,7 @@ export const ResizableCircle: FC<Node<ResizableNodeData>> = ({
             cy={data.height / 2}
             rx={data.width / 2 - 2}
             ry={data.height / 2 - 2}
-            fill={"transparent"}
+            fill={data.color || "transparent"}
             stroke={strokeColor}
             strokeWidth="2"
           />

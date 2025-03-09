@@ -44,14 +44,28 @@ export const ResizableSquare: FC<Node<ResizableNodeData>> = ({
         style={{
           width: data.width,
           height: data.height,
-          backgroundColor: data.color || "rgba(0, 0, 255, 0.5)",
+          backgroundColor: data.color || "transparent",
           border: "2px solid #555",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
         }}
       >
-        {data.label}
+        <div className="absolute inset-0 flex items-center justify-center">
+          <input
+            type="text"
+            defaultValue={data.label}
+            onChange={(e) => {
+              data.label = e.target.value;
+            }}
+            className="bg-transparent border-none text-center focus:outline-none"
+            style={{
+              fontSize: `${Math.max(data.width / 6, data.height / 6)}px`,
+              height: `${Math.max(data.width / 5, data.height / 5)}px`,
+              width: "80%",
+            }}
+          />
+        </div>
       </div>
       <Handle type="source" position={Position.Right} />
     </>

@@ -79,25 +79,29 @@ export const ResizableCylinder: FC<Node<ResizableNodeData>> = ({
             cy={data.height + ellipseHeight}
             rx={data.width / 2}
             ry={ellipseHeight}
-            fill={data.color}
+            fill={data.color || "transparent"}
             stroke={strokeColor}
             strokeWidth="2"
           />
 
           {/* Cylinder Text */}
-          <text
-            x={data.width / 2}
-            y={data.height / 2 + ellipseHeight}
-            textAnchor="middle"
-            dominantBaseline="middle"
-            fill={"black"}
-            fontWeight="bold"
-            fontSize={Math.min(data.width / 5, data.height / 5)}
-          >
-            {data.label}
-          </text>
         </g>
       </svg>
+      <div className="absolute inset-0 flex items-center justify-center">
+        <input
+          type="text"
+          defaultValue={data.label}
+          onChange={(e) => {
+            data.label = e.target.value;
+          }}
+          className="bg-transparent border-none text-center focus:outline-none"
+          style={{
+            fontSize: `${Math.max(data.width / 6, data.height / 6)}px`,
+            height: `${Math.max(data.width / 5, data.height / 5)}px`,
+            width: "80%",
+          }}
+        />
+      </div>
 
       <Handle type="target" position={Position.Left} />
       <Handle type="source" position={Position.Right} />
