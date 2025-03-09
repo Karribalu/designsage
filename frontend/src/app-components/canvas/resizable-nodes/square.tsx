@@ -45,7 +45,7 @@ export const ResizableSquare: FC<Node<ResizableNodeData>> = ({
           width: data.width,
           height: data.height,
           backgroundColor: data.color || "rgba(0, 0, 255, 0.5)",
-          border: selected ? "2px solid #555" : "1px solid #222",
+          border: "2px solid #555",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",

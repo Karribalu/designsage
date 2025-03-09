@@ -8,3 +8,18 @@ export const EDGE_TYPES = {
   forward: "forward",
   backward: "backward",
 };
+
+export const NODE_SIZES: Record<string, { width: number; height: number }> = {
+  circle: {
+    width: 120,
+    height: 120,
+  },
+  cylinder: {
+    width: 110,
+    height: 140,
+  },
+  square: {
+    width: 120,
+    height: 120,
+  },
+};

@@ -25,6 +25,7 @@ import { setSelectedNodeType } from "@/store/canvas/nodeDropReducer";
 import { v4 as uuidv4 } from "uuid";
 import { ResizableSquare } from "./resizable-nodes/square";
 import {
+  NODE_SIZES,
   RESIZABLE_CYLINDER_NODE_MIN_HEIGHT,
   RESIZABLE_CYLINDER_NODE_MIN_WIDTH,
   RESIZABLE_NODE_MIN_HEIGHT,
@@ -49,10 +50,9 @@ const initialNodes: Node<ResizableNodeData>[] = [
     position: { x: 0, y: 300 },
     data: {
       label: "cylinder",
-      height: RESIZABLE_CYLINDER_NODE_MIN_HEIGHT,
-      width: RESIZABLE_CYLINDER_NODE_MIN_WIDTH,
       color: "#EBC347",
       type: "cylinder",
+      ...NODE_SIZES["cylinder"],
     },
     type: "cylinder",
   },
@@ -110,34 +110,17 @@ const CanvasComponent: FC<IProps> = (_) => {
   );
   const onClick = (event: React.MouseEvent) => {
     if (nodeType != null) {
-      let newNode = null;
-      if (nodeType === "cylinder") {
-        newNode = {
-          id: getNodeId(),
-          position: { x: event.clientX, y: event.clientY },
-          data: {
-            label: nodeType,
-            height: RESIZABLE_CYLINDER_NODE_MIN_HEIGHT,
-            width: RESIZABLE_CYLINDER_NODE_MIN_WIDTH,
-            color: "#EBC347",
-            type: nodeType,
-          },
+      let newNode = {
+        id: getNodeId(),
+        position: { x: event.clientX, y: event.clientY },
+        data: {
+          label: nodeType,
+          color: "#EBC347",
           type: nodeType,
-        };
-      } else {
-        newNode = {
-          id: getNodeId(),
-          position: { x: event.clientX, y: event.clientY },
-          data: {
-            label: nodeType,
-            height: RESIZABLE_NODE_MIN_HEIGHT,
-            width: RESIZABLE_NODE_MIN_WIDTH,
-            color: "#EBC347",
-            type: nodeType,
-          },
-          type: nodeType,
-        };
-      }
+          ...NODE_SIZES[nodeType],
+        },
+        type: nodeType,
+      };
       setNodes((nodes) => nodes.concat(newNode));
       dispatch(setSelectedNodeType(null));
     }

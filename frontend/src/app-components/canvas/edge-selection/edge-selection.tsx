@@ -41,7 +41,10 @@ export const EdgeSelection: FC<IProps> = ({
         <CardDescription>Select the edge you want to change</CardDescription>
       </CardHeader>
       <CardContent>
-        <RadioGroup defaultValue="forward" onValueChange={handleEdgeTypeChange}>
+        <RadioGroup
+          defaultValue={edge?.type}
+          onValueChange={handleEdgeTypeChange}
+        >
           <div className=" flex items-center space-x-4 rounded-md border p-4">
             <RadioGroupItem value="forward" id="forward" />
             <div className="flex items-center space-x-13">
