@@ -127,15 +127,31 @@ const CanvasComponent: FC<IProps> = (_) => {
   };
   const onEdgeDoubleClick = (event: React.MouseEvent, edge: Edge) => {
     console.log("I am on edge double click ", event, edge);
+    edge.data = {
+      ...edge.data,
+      isEditing: true,
+    };
+    setEdges((eds) => eds.map((e) => (e.id === edge.id ? edge : e)));
   };
   const onEdgeClick = (event: React.MouseEvent, edge: Edge) => {
     setEdgeSelection(edge);
     setEdgeSelectionPosition({ x: event.clientX, y: event.clientY });
+    edge.data = {
+      ...edge.data,
+      isEditing: false,
+    };
+    setEdges((eds) => eds.map((e) => (e.id === edge.id ? edge : e)));
   };
 
   const onPaneClick = (event: React.MouseEvent) => {
     setEdgeSelection(null);
     setEdgeSelectionPosition(null);
+    setEdges((eds) =>
+      eds.map((e) => ({
+        ...e,
+        data: { ...e.data, isEditing: false },
+      }))
+    );
   };
   const handleEdgeTypeChange = (edge: Edge, type: string) => {
     edge.type = type;
@@ -153,6 +169,7 @@ const CanvasComponent: FC<IProps> = (_) => {
         onClick={onClick}
         defaultEdgeOptions={{
           type: "forward",
+          label: "label",
           markerEnd: { type: MarkerType.Arrow, strokeWidth: 3, color: "black" },
           markerStart: {
             type: MarkerType.Arrow,
@@ -167,7 +184,7 @@ const CanvasComponent: FC<IProps> = (_) => {
           strokeWidth: 2,
         }}
         onEdgeDoubleClick={onEdgeDoubleClick}
-        onEdgeClick={onEdgeClick}
+        // onEdgeClick={onEdgeClick}
         onPaneClick={onPaneClick}
       >
         <Panel position="top-center">

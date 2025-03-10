@@ -1,5 +1,11 @@
-import { BaseEdge, Edge, EdgeProps, getStraightPath } from "@xyflow/react";
-import React, { FC } from "react";
+import {
+  BaseEdge,
+  Edge,
+  EdgeLabelRenderer,
+  EdgeProps,
+  getStraightPath,
+} from "@xyflow/react";
+import React, { FC, useState } from "react";
 import { ResizableEdgeData } from "../../types";
 const BackwardEdge: FC<EdgeProps<Edge<ResizableEdgeData>>> = ({
   sourceX,
@@ -8,6 +14,8 @@ const BackwardEdge: FC<EdgeProps<Edge<ResizableEdgeData>>> = ({
   targetY,
   markerStart,
   style,
+  data,
+  id,
 }) => {
   const [edgePath] = getStraightPath({
     sourceX,
@@ -15,10 +23,6 @@ const BackwardEdge: FC<EdgeProps<Edge<ResizableEdgeData>>> = ({
     targetX,
     targetY,
   });
-  const handleEdgeDoubleClick = (event: React.MouseEvent) => {
-    console.log("I am on edge double click ", event);
-  };
-
   return (
     <>
       <BaseEdge
@@ -29,6 +33,7 @@ const BackwardEdge: FC<EdgeProps<Edge<ResizableEdgeData>>> = ({
           strokeWidth: 2,
           stroke: "black",
         }}
+        id={id}
       />
     </>
   );

@@ -14,4 +14,5 @@ export interface ResizableEdgeData extends Record<string, unknown> {
   color: string;
   style: string;
   label: string;
+  isEditing: boolean;
 }
