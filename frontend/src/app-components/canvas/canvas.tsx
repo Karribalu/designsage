@@ -46,7 +46,7 @@ interface IProps {}
  **/
 const initialNodes: Node<ResizableNodeData>[] = [
   {
-    id: "node-0",
+    id: "node_0",
     position: { x: 0, y: 300 },
     data: {
       label: "cylinder",
@@ -74,7 +74,7 @@ const edgeTypes = {
 let i = 0;
 let getNodeId = () => {
   i++;
-  return `node-${i}`;
+  return `node_${i}`;
 };
 const CanvasComponent: FC<IProps> = (_) => {
   const [nodes, setNodes] =
@@ -136,11 +136,34 @@ const CanvasComponent: FC<IProps> = (_) => {
   const onEdgeClick = (event: React.MouseEvent, edge: Edge) => {
     setEdgeSelection(edge);
     setEdgeSelectionPosition({ x: event.clientX, y: event.clientY });
-    edge.data = {
-      ...edge.data,
-      isEditing: false,
-    };
-    setEdges((eds) => eds.map((e) => (e.id === edge.id ? edge : e)));
+    // edge.data = {
+    //   ...edge.data,
+    //   selected: true,
+    //   isEditing: false,
+    // };
+    // setEdges((eds) => eds.map((e) => (e.id === edge.id ? edge : e)));
+    setEdges((eds) =>
+      eds.map((e) => {
+        if (e.id === edge.id) {
+          return {
+            ...e,
+            selected: true,
+            data: {
+              ...e.data,
+              isEditing: false,
+            },
+          };
+        }
+        return {
+          ...e,
+          selected: false,
+          data: {
+            ...e.data,
+            isEditing: false,
+          },
+        };
+      })
+    );
   };
 
   const onPaneClick = (event: React.MouseEvent) => {
@@ -149,6 +172,7 @@ const CanvasComponent: FC<IProps> = (_) => {
     setEdges((eds) =>
       eds.map((e) => ({
         ...e,
+        selected: false,
         data: { ...e.data, isEditing: false },
       }))
     );
@@ -176,6 +200,9 @@ const CanvasComponent: FC<IProps> = (_) => {
             strokeWidth: 3,
             color: "black",
           },
+          data: {
+            label: null,
+          },
         }}
         connectionLineType={ConnectionLineType.Straight}
         connectionLineStyle={{
@@ -184,7 +211,7 @@ const CanvasComponent: FC<IProps> = (_) => {
           strokeWidth: 2,
         }}
         onEdgeDoubleClick={onEdgeDoubleClick}
-        // onEdgeClick={onEdgeClick}
+        onEdgeClick={onEdgeClick}
         onPaneClick={onPaneClick}
       >
         <Panel position="top-center">
