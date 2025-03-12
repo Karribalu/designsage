@@ -10,9 +10,11 @@ export interface ResizableNodeData extends Record<string, unknown> {
 }
 
 export interface ResizableEdgeData extends Record<string, unknown> {
-  type: string;
+  type: EdgeType;
   color: string;
   style: string;
   label: string;
   isEditing: boolean;
+  setSelected: (selected: boolean) => void;
 }
+export type EdgeType = "forward" | "backward" | "biDirectional";

@@ -56,8 +56,36 @@ const initialNodes: Node<ResizableNodeData>[] = [
     },
     type: "cylinder",
   },
+  {
+    id: "node_1",
+    position: { x: 300, y: 300 },
+    data: {
+      label: "cylinder",
+      color: "#EBC347",
+      type: "cylinder",
+      ...NODE_SIZES["cylinder"],
+    },
+    type: "cylinder",
+  },
 ];
-const initialEdges: Edge<ResizableEdgeData>[] = [];
+const initialEdges: Edge<ResizableEdgeData>[] = [
+  {
+    id: "edge_0",
+    source: "node_0",
+    target: "node_1",
+    selected: true,
+    data: {
+      label: "label",
+      isEditing: false,
+      type: "forward",
+      color: "black",
+      style: "solid",
+      setSelected: (isSelected: boolean) => {
+        console.log("isSelected", isSelected);
+      },
+    },
+  },
+];
 
 // FIXME: This is a workaround to fix the type error
 const nodeTypes: NodeTypes = {
@@ -130,6 +158,10 @@ const CanvasComponent: FC<IProps> = (_) => {
     edge.data = {
       ...edge.data,
       isEditing: true,
+      setSelected: (isSelected: boolean) => {
+        
+        console.log("isSelected", isSelected);
+      },
     };
     setEdges((eds) => eds.map((e) => (e.id === edge.id ? edge : e)));
   };

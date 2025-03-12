@@ -7,7 +7,9 @@ export const RESIZABLE_CYLINDER_NODE_MIN_HEIGHT = 160;
 export const EDGE_TYPES = {
   forward: "forward",
   backward: "backward",
+  bidirectional: "bidirectional",
 };
+
 
 export const NODE_SIZES: Record<string, { width: number; height: number }> = {
   circle: {

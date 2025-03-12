@@ -1,4 +1,4 @@
-import { ResizableEdgeData } from "@/app-components/types";
+import { EdgeType, ResizableEdgeData } from "@/app-components/types";
 import {
   HoverCard,
   HoverCardContent,
@@ -18,6 +18,7 @@ import {
 } from "@xyflow/react";
 import React, { FC, useEffect } from "react";
 import { LabelHandler } from "./label-handler";
+import { Label } from "@radix-ui/react-label";
 const ForwardEdge: FC<EdgeProps<Edge<ResizableEdgeData>>> = ({
   id,
   sourceX,
@@ -28,6 +29,7 @@ const ForwardEdge: FC<EdgeProps<Edge<ResizableEdgeData>>> = ({
   style,
   selected,
   data,
+  setSelected,
 }) => {
   const [edgePath, labelX, labelY] = getStraightPath({
     sourceX,
@@ -55,6 +57,15 @@ const ForwardEdge: FC<EdgeProps<Edge<ResizableEdgeData>>> = ({
   console.log("====================================");
   console.log("is selected ", selected);
   console.log("====================================");
+  const handleApply = (text: string, type: EdgeType) => {
+    console.log("text", text);
+    console.log("type", type);
+    if (data) {
+      data.label = text;
+      data.type = type;
+    }
+    setSelected(false);
+  };
   return (
     <>
       <BaseEdge
@@ -89,31 +100,24 @@ const ForwardEdge: FC<EdgeProps<Edge<ResizableEdgeData>>> = ({
         </PopoverContent>
       </Popover> */}
       <EdgeLabelRenderer>
-        {/* <div
-          className="absolute transform-origin-center nodrag nopan w-full items-center justify-center"
+        <Label
           style={{
-            transform: `translate(-50%, -50%) translate(${labelX}px,${labelY}px)`,
             pointerEvents: "all",
+            position: "absolute",
+            transform: `translate(-50%, -50%) translate(${labelX}px,${labelY}px)`,
           }}
         >
-          <input
-            type="text"
-            className="border-none outline-none text-center "
-            defaultValue={data?.label}
-            onChange={(e) => {
-              console.log(e.target.value);
-              if (data) {
-                data.label = e.target.value;
-              }
-            }}
-            style={{
-              width: data?.isEditing ? "100%" : "fit-content",
-              height: "100%",
-              backgroundColor: "transparent",
-            }}
-          />
-        </div> */}
-        <LabelHandler open={selected} labelX={labelX} labelY={labelY} />
+          {data?.label}
+        </Label>
+
+        <LabelHandler
+          open={selected}
+          labelX={labelX}
+          labelY={labelY}
+          edgeType={data?.type}
+          label={data?.label}
+          onApply={handleApply}
+        />
       </EdgeLabelRenderer>
     </>
   );
