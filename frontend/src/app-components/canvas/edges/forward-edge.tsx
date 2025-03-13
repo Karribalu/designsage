@@ -29,7 +29,7 @@ const ForwardEdge: FC<EdgeProps<Edge<ResizableEdgeData>>> = ({
   style,
   selected,
   data,
-  setSelected,
+  // setSelected,
 }) => {
   const [edgePath, labelX, labelY] = getStraightPath({
     sourceX,
