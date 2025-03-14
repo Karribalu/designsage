@@ -60,6 +60,7 @@ export const LabelHandler: FC<IProps> = (props) => {
                 strokeWidth={2}
                 onClick={() => handleToolChange("text")}
               />
+              
             </div>
             <div className="p-2 rounded-full bg-gray-100 cursor-pointer hover:bg-gray-200">
               <MoveHorizontal
