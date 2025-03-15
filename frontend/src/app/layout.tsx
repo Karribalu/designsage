@@ -4,6 +4,7 @@ import "@xyflow/react/dist/style.css";
 import "./globals.css";
 import { Provider } from "react-redux";
 import { store } from "@/store/store";
+import { Navbar } from "@/app-components/navbar/navbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,7 +38,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Provider store={store}>{children}</Provider>
+        <Provider store={store}>
+          <Navbar />
+          <main className="flex-1 px-[10%]">{children}</main>
+        </Provider>
       </body>
     </html>
   );

@@ -1,0 +1,122 @@
+[
+  {
+    "id": 1,
+    "title": "Design a URL Shortening Service",
+    "difficulty": "Medium",
+    "categories": ["Web Services"],
+    "tags": ["Load Balancing", "Database", "Caching"],
+    "status": "Attempted",
+    "isBookmarked": true,
+    "description": "Create a system that converts long URLs into shorter, more manageable links."
+  },
+  {
+    "id": 2,
+    "title": "Design Twitter",
+    "difficulty": "Hard",
+    "categories": ["Social Media"],
+    "tags": ["Distributed Systems", "Real-time", "Database"],
+    "status": "Not Attempted",
+    "isBookmarked": false,
+    "description": "Design a simplified version of Twitter focusing on the tweet feed, posting, and following functionality."
+  },
+  {
+    "id": 3,
+    "title": "Design a Rate Limiter",
+    "difficulty": "Medium",
+    "categories": ["API Design"],
+    "tags": ["Algorithms", "Concurrency", "Distributed Systems"],
+    "status": "Attempted",
+    "isBookmarked": false,
+    "description": "Create a system that limits the rate of API requests a user can make."
+  },
+  {
+    "id": 4,
+    "title": "Design Netflix",
+    "difficulty": "Hard",
+    "categories": ["Streaming"],
+    "tags": ["CDN", "Recommendation", "Storage"],
+    "status": "Not Attempted",
+    "isBookmarked": false,
+    "description": "Design a video streaming platform with a focus on content delivery and recommendation systems."
+  },
+  {
+    "id": 5,
+    "title": "Design a Chat Application",
+    "difficulty": "Medium",
+    "categories": ["Communication"],
+    "tags": ["WebSockets", "Real-time", "Database"],
+    "status": "Not Attempted",
+    "isBookmarked": false,
+    "description": "Create a real-time messaging application supporting one-on-one and group conversations."
+  },
+  {
+    "id": 6,
+    "title": "Design a Distributed File Storage System",
+    "difficulty": "Hard",
+    "categories": ["Storage"],
+    "tags": ["Distributed Systems", "Consistency", "Storage"],
+    "status": "Not Attempted",
+    "isBookmarked": false,
+    "description": "Design a system like Google Drive or Dropbox for storing and sharing files."
+  },
+  {
+    "id": 7,
+    "title": "Design an Online Bookstore",
+    "difficulty": "Medium",
+    "categories": ["E-Commerce"],
+    "tags": ["Database", "Caching", "Recommendation Engine"],
+    "status": "Not Attempted",
+    "isBookmarked": false,
+    "description": "Create an online bookstore like Amazon Kindle."
+  },
+  {
+    "id": 8,
+    "title": "Design a Food Delivery System",
+    "difficulty": "Hard",
+    "categories": ["Logistics"],
+    "tags": ["Real-time Tracking", "Database", "Routing"],
+    "status": "Not Attempted",
+    "isBookmarked": true,
+    "description": "Create a system for ordering and delivering food like UberEats."
+  },
+  {
+    "id": 9,
+    "title": "Design a Ride-Sharing App",
+    "difficulty": "Hard",
+    "categories": ["Transportation"],
+    "tags": ["Real-time", "Geolocation", "Payment Gateway"],
+    "status": "Not Attempted",
+    "isBookmarked": true,
+    "description": "Build a system like Uber or Lyft for ride-sharing."
+  },
+  {
+    "id": 10,
+    "title": "Design a Search Engine",
+    "difficulty": "Hard",
+    "categories": ["Web Services"],
+    "tags": ["Crawling", "Indexing", "Ranking"],
+    "status": "Not Attempted",
+    "isBookmarked": false,
+    "description": "Design a search engine like Google or Bing."
+  },
+  {
+    "id": 11,
+    "title": "Design a Social Media Platform",
+    "difficulty": "Hard",
+    "categories": ["Social Media"],
+    "tags": ["Distributed Systems", "Real-time", "Database"],
+    "status": "Not Attempted",
+    "isBookmarked": false,
+    "description": "Design a social media platform like Facebook or Instagram."
+  },
+  {
+    "id": 12,
+    "title": "Design a Video Streaming Service",
+    "difficulty": "Easy",
+    "categories": ["Streaming"],
+    "tags": ["CDN", "Recommendation", "Storage"],
+    "status": "Not Attempted",
+    "isBookmarked": false,
+    "description": "Design a video streaming service like Netflix or Amazon Prime."
+  }
+]
