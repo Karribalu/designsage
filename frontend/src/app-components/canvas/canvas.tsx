@@ -1,43 +1,35 @@
 "use client";
+import { useAppDispatch, useAppSelector } from "@/app/hooks";
+import { NODE_SIZES } from "@/constants";
+import { setSelectedNodeType } from "@/store/canvas/nodeDropReducer";
 import {
   addEdge,
   applyNodeChanges,
   Background,
   BackgroundVariant,
+  ConnectionLineType,
   Controls,
   Edge,
+  MarkerType,
   Node,
   NodeChange,
+  NodeTypes,
   OnConnect,
   Panel,
   ReactFlow,
   useNodesState,
-  MarkerType,
-  ConnectionLineType,
-  NodeTypes,
 } from "@xyflow/react";
-
 import React, { FC, useCallback, useEffect, useState } from "react";
-import { ResizableCircle } from "./resizable-nodes/circle";
 import { ShapesBar } from "../shapes-bar/shapesBar";
-import { useAppDispatch, useAppSelector } from "@/app/hooks";
-import { setSelectedNodeType } from "@/store/canvas/nodeDropReducer";
-import { v4 as uuidv4 } from "uuid";
-import { ResizableSquare } from "./resizable-nodes/square";
-import {
-  NODE_SIZES,
-  RESIZABLE_CYLINDER_NODE_MIN_HEIGHT,
-  RESIZABLE_CYLINDER_NODE_MIN_WIDTH,
-  RESIZABLE_NODE_MIN_HEIGHT,
-  RESIZABLE_NODE_MIN_WIDTH,
-} from "@/constants";
-import ResizableCylinder from "./resizable-nodes/cylinder";
-import ForwardEdge from "./edges/forward-edge";
+import { ResizableEdgeData, ResizableNodeData } from "../types";
+import mermaidUtility from "../utils/mermaid-utility";
 import { EdgeSelection } from "./edge-selection/edge-selection";
 import BackwardEdge from "./edges/backward-edge";
 import BiDirectionalEdge from "./edges/bi-directional-edge";
-import mermaidUtility from "../utils/mermaid-utility";
-import { ResizableEdgeData, ResizableNodeData } from "../types";
+import ForwardEdge from "./edges/forward-edge";
+import { ResizableCircle } from "./resizable-nodes/circle";
+import ResizableCylinder from "./resizable-nodes/cylinder";
+import { ResizableSquare } from "./resizable-nodes/square";
 interface IProps {}
 
 /**
@@ -46,7 +38,7 @@ interface IProps {}
  **/
 const initialNodes: Node<ResizableNodeData>[] = [
   {
-    id: "node_0",
+    id: "node_100",
     position: { x: 0, y: 300 },
     data: {
       label: "cylinder",
@@ -57,7 +49,7 @@ const initialNodes: Node<ResizableNodeData>[] = [
     type: "cylinder",
   },
   {
-    id: "node_1",
+    id: "node_101",
     position: { x: 300, y: 300 },
     data: {
       label: "cylinder",
@@ -70,9 +62,9 @@ const initialNodes: Node<ResizableNodeData>[] = [
 ];
 const initialEdges: Edge<ResizableEdgeData>[] = [
   {
-    id: "edge_0",
-    source: "node_0",
-    target: "node_1",
+    id: "edge_100",
+    source: "node_100",
+    target: "node_101",
     selected: true,
     data: {
       label: "label",
@@ -159,7 +151,6 @@ const CanvasComponent: FC<IProps> = (_) => {
       ...edge.data,
       isEditing: true,
       setSelected: (isSelected: boolean) => {
-        
         console.log("isSelected", isSelected);
       },
     };

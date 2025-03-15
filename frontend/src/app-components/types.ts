@@ -13,7 +13,7 @@ export interface ResizableEdgeData extends Record<string, unknown> {
   type: EdgeType;
   color: string;
   style: string;
-  label: string;
+  label?: string;
   isEditing: boolean;
   setSelected: (selected: boolean) => void;
 }

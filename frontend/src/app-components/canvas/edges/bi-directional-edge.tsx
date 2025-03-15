@@ -7,6 +7,7 @@ import {
   getStraightPath,
 } from "@xyflow/react";
 import React, { FC } from "react";
+import { LabelHandler } from "./label-handler";
 
 const BiDirectionalEdge: FC<EdgeProps<Edge<ResizableEdgeData>>> = ({
   sourceX,
@@ -16,6 +17,7 @@ const BiDirectionalEdge: FC<EdgeProps<Edge<ResizableEdgeData>>> = ({
   markerStart,
   markerEnd,
   style,
+  selected,
   data,
 }) => {
   const [edgePath, labelX, labelY] = getStraightPath({
@@ -36,27 +38,19 @@ const BiDirectionalEdge: FC<EdgeProps<Edge<ResizableEdgeData>>> = ({
           stroke: "black",
         }}
       />
-      <EdgeLabelRenderer>
-        <div
-          className="absolute transform-origin-center nodrag nopan w-full items-center justify-center"
-          style={{
-            transform: `translate(-50%, -50%) translate(${labelX}px,${labelY}px)`,
-            pointerEvents: "all",
-          }}
-        >
-          <input
-            type="text"
-            className="w-full border-none outline-none text-center "
-            defaultValue={data?.label}
-            onChange={(e) => {
-              console.log(e.target.value);
-              if (data) {
-                data.label = e.target.value;
-              }
+      {(data?.label || selected) && (
+        <EdgeLabelRenderer>
+          <div
+            className="absolute"
+            style={{
+              transform: `translate(-50%,-50%) translate(${labelX}px,${labelY}px)`,
+              pointerEvents: "all",
             }}
-          />
-        </div>
-      </EdgeLabelRenderer>
+          >
+            <LabelHandler data={data} />
+          </div>
+        </EdgeLabelRenderer>
+      )}
     </>
   );
 };
