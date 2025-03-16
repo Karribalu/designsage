@@ -18,3 +18,14 @@ export interface ResizableEdgeData extends Record<string, unknown> {
   setSelected: (selected: boolean) => void;
 }
 export type EdgeType = "forward" | "backward" | "biDirectional";
+
+export interface IQuestion {
+  id: string;
+  title: string;
+  description: string;
+  tags: string[];
+  difficulty: string;
+  categories: string[];
+  isBookmarked: boolean;
+  status: string;
+}

@@ -205,7 +205,7 @@ const CanvasComponent: FC<IProps> = (_) => {
     setEdges((eds) => eds.map((e) => (e.id === edge.id ? edge : e)));
   };
   return (
-    <div style={{ width: "100vw", height: "100vh" }}>
+    <div className="w-full h-full">
       <ReactFlow
         nodes={nodes}
         edges={edges}

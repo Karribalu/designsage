@@ -21,7 +21,7 @@ export const Navbar: FC<IProps> = (props) => {
   const pathname = usePathname();
   const isActive = (path: string) => pathname === path;
   return (
-    <div className="flex justify-between items-center h-16 w-full px-10 border-b border-gray-200 bg-white">
+    <div className="flex justify-between items-center h-16 w-full px-10 border-b border-gray-200 bg-white fixed top-0 left-0 z-10">
       <div className="text-xl font-bold">DesignSage</div>
       <NavigationMenu className="flex justify-center items-center h-16 w-full">
         <NavigationMenuList>

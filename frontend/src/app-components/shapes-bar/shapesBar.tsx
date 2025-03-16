@@ -33,10 +33,7 @@ export const ShapesBar: FC<IProps> = (props) => {
     dispatch(setSelectedNodeType(shape));
   };
   return (
-    <div className="flex items-center space-x-2 bg-white p-2 shadow-md rounded-lg">
-      {/* <Button variant="outline" size="icon">
-        {/* <Lock size={20} /> */}
-      {/* </Button> */}
+    <div className="mt-16 flex items-center space-x-2 bg-white p-2 shadow-md rounded-lg">
       <Button variant="outline" size="icon">
         <Hand size={20} />
       </Button>

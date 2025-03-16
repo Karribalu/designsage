@@ -5,6 +5,7 @@ import "./globals.css";
 import { Provider } from "react-redux";
 import { store } from "@/store/store";
 import { Navbar } from "@/app-components/navbar/navbar";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -40,7 +41,9 @@ export default function RootLayout({
       >
         <Provider store={store}>
           <Navbar />
-          <main className="flex-1 px-[10%]">{children}</main>
+
+          <main className="flex-1 px-[5%]">{children}</main>
+          {/* </SidebarProvider> */}
         </Provider>
       </body>
     </html>

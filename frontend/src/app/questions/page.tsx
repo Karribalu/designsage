@@ -12,6 +12,8 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Bookmark, Check } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { IQuestion } from "@/app-components/types";
 interface IProps {}
 
 /**
@@ -19,16 +21,6 @@ interface IProps {}
  * @function @Questions
  **/
 
-interface IQuestion {
-  id: string;
-  title: string;
-  description: string;
-  tags: string[];
-  difficulty: string;
-  categories: string[];
-  isBookmarked: boolean;
-  status: string;
-}
 const difficultyColors = {
   Easy: "bg-green-100",
   Medium: "bg-yellow-100",
@@ -37,9 +29,9 @@ const difficultyColors = {
 
 export const Questions: FC<IProps> = (props) => {
   const [questions, setQuestions] = useState<IQuestion[]>([]);
-
+  const router = useRouter();
   useEffect(() => {
-    const questions = require("./mock-questions.json");
+    const questions = require("@/lib/mocks/mock-questions.json");
     setQuestions(questions);
     console.log(questions);
   }, []);
@@ -117,7 +109,13 @@ export const Questions: FC<IProps> = (props) => {
                     {category}
                   </Badge>
                 ))}
-                <Button size="sm" className="text-xs cursor-pointer">
+                <Button
+                  size="sm"
+                  className="text-xs cursor-pointer"
+                  onClick={() => {
+                    router.push(`/practise/${question.id}`);
+                  }}
+                >
                   Practise Now
                 </Button>
               </div>
