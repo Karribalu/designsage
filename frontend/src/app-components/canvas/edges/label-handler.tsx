@@ -15,7 +15,7 @@ export const LabelHandler: FC<IProps> = (props) => {
   return (
     <>
       <Textarea
-        className="border-none nopan outline-none text-center resize-none focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:ring-transparent"
+        className="border-none nopan outline-none text-center resize-none focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:ring-transparent "
         defaultValue={props.data?.label}
         style={{
           backgroundColor: "white",

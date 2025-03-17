@@ -12,7 +12,7 @@ interface IProps {}
  **/
 
 export const Practise: FC<IProps> = (props) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
   const { questionId } = useParams();
   return (
     <div className="flex">
