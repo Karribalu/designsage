@@ -88,19 +88,23 @@ export const SideBar: FC<IProps> = (props) => {
       className="top-16 pb-15 h-full"
     >
       <SidebarContent>
-        <div className="flex flex-col gap-3 p-4">
-          <h1 className="text-xl font-bold">{question?.title}</h1>
-          <span className="text-sm text-gray-500">{question?.description}</span>
-          <div className="flex flex-col gap-2">
-            <div className="flex flex-wrap gap-2">
-              {question?.tags.map((tag) => (
-                <Badge key={tag} variant="outline">
-                  {tag}
-                </Badge>
-              ))}
+        {isOpen && (
+          <div className="flex flex-col gap-3 p-4">
+            <h1 className="text-xl font-bold">{question?.title}</h1>
+            <span className="text-sm text-gray-500">
+              {question?.description}
+            </span>
+            <div className="flex flex-col gap-2">
+              <div className="flex flex-wrap gap-2">
+                {question?.tags.map((tag) => (
+                  <Badge key={tag} variant="outline">
+                    {tag}
+                  </Badge>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </SidebarContent>
       <SidebarFooter>
         <div className="flex">

@@ -36,7 +36,7 @@ export const Questions: FC<IProps> = (props) => {
     console.log(questions);
   }, []);
   return (
-    <div className="flex flex-col gap-2 pt-10">
+    <div className="flex flex-col gap-2 pt-10 mt-14">
       <div className="flex flex-col gap-2">
         <div className="flex flex-col gap-2">
           <h1 className="text-2xl font-bold">System Design Questions</h1>

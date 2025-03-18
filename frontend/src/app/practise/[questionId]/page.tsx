@@ -4,6 +4,8 @@ import { useParams } from "next/navigation";
 import { SideBar } from "@/app-components/sidebar/sidebar";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import CanvasComponent from "@/app-components/canvas/canvas";
+import { CommunicationToolbar } from "@/app-components/communication-toolbar/communication-toolbar";
+import questions from "@/lib/mocks/mock-questions.json";
 interface IProps {}
 
 /**
@@ -14,6 +16,9 @@ interface IProps {}
 export const Practise: FC<IProps> = (props) => {
   const [isOpen, setIsOpen] = useState(true);
   const { questionId } = useParams();
+  const question = questions.find(
+    (question) => question.id === parseInt(questionId as string)
+  );
   return (
     <div className="flex">
       <SidebarProvider className="absolute left-0" open={isOpen}>
@@ -22,8 +27,9 @@ export const Practise: FC<IProps> = (props) => {
           isOpen={isOpen}
           setIsOpen={setIsOpen}
         />
-        <div className="flex-1">
+        <div className="flex flex-col w-full">
           <CanvasComponent />
+          <CommunicationToolbar questionName={question?.title} />
         </div>
       </SidebarProvider>
     </div>

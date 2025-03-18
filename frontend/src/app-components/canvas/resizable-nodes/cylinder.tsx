@@ -96,8 +96,8 @@ export const ResizableCylinder: FC<Node<ResizableNodeData>> = ({
           }}
           className="bg-transparent border-none text-center focus:outline-none"
           style={{
-            fontSize: `${Math.max(data.width / 6, data.height / 6)}px`,
-            height: `${Math.max(data.width / 5, data.height / 5)}px`,
+            // fontSize: `${Math.max(data.width / 6, data.height / 6)}px`,
+            // height: `${Math.max(data.width / 5, data.height / 5)}px`,
             width: "80%",
           }}
         />

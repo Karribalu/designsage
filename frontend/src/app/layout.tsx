@@ -41,9 +41,7 @@ export default function RootLayout({
       >
         <Provider store={store}>
           <Navbar />
-
           <main className="flex-1 px-[5%]">{children}</main>
-          {/* </SidebarProvider> */}
         </Provider>
       </body>
     </html>
