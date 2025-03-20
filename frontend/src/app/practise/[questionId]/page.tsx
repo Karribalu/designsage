@@ -6,6 +6,7 @@ import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import CanvasComponent from "@/app-components/canvas/canvas";
 import { CommunicationToolbar } from "@/app-components/communication-toolbar/communication-toolbar";
 import questions from "@/lib/mocks/mock-questions.json";
+
 interface IProps {}
 
 /**
@@ -19,6 +20,7 @@ export const Practise: FC<IProps> = (props) => {
   const question = questions.find(
     (question) => question.id === parseInt(questionId as string)
   );
+
   return (
     <div className="flex">
       <SidebarProvider className="absolute left-0" open={isOpen}>
