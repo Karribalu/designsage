@@ -111,8 +111,8 @@ export const CommunicationToolbar: FC<IProps> = (props) => {
     <div
       className={`${
         isMinimized
-          ? "fixed bottom-4 right-4 w-auto h-auto bg-gray-900 text-white p-2 rounded-lg hover:bg-gray-600 cursor-pointer"
-          : "fixed bg-gray-900 text-white p-4 rounded-lg shadow-lg"
+          ? "fixed bottom-4 right-4"
+          : "fixed bg-gray-900 text-white p-4 rounded-lg shadow-lg cursor-move"
       } ${props.className}`}
       style={{
         top: isMinimized ? "auto" : `${position.y}px`,
@@ -122,7 +122,7 @@ export const CommunicationToolbar: FC<IProps> = (props) => {
       onMouseDown={!isMinimized ? handleMouseDown : undefined}
     >
       {!isMinimized && (
-        <div className="flex items-center justify-between cursor-move">
+        <div className="flex items-center justify-between gap-4">
           <div>
             {/* Left */}
             <span>{`${hours}:${minutes}`}</span>
@@ -145,7 +145,7 @@ export const CommunicationToolbar: FC<IProps> = (props) => {
           width={150}
           height={150}
           className="rounded-full bg-gray-800"
-        ></canvas>
+        />
         <Button
           size="icon"
           className="bg-gray-700 text-white cursor-pointer hover:bg-gray-600"
@@ -174,7 +174,7 @@ export const CommunicationToolbar: FC<IProps> = (props) => {
       {isMinimized && (
         <Button
           size="icon"
-          className=" text-white cursor-pointe w-full hover:bg-gray-600 cursor-pointer"
+          className=" p-4 text-white cursor-pointe w-full hover:bg-gray-600 cursor-pointer"
           onClick={() => setIsMinimized(false)}
         >
           Expand
