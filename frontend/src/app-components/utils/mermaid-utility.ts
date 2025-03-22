@@ -19,6 +19,8 @@ const mermaidUtility = {
       }
     });
 
+    
+
     // Add edges with different arrow styles based on edge type
     edges.forEach((edge) => {
       switch (edge.type) {
