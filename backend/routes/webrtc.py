@@ -8,6 +8,11 @@ router = APIRouter(
 )
 
 
+@router.get("/")
+async def hello_world():
+    return {"message": "Hello World"}
+
+
 @router.get("/ephimeral-token")
 async def get_ephimeral_token():
     url = os.getenv("OPEN_AI_BASE_URL") + \
@@ -23,5 +28,7 @@ async def get_ephimeral_token():
             "voice": "verse"
         }
     }
-    response = openai_service.request(url, params)
-    return {"token": "1234"}
+    response = requests.post(
+        url, headers=params["headers"], json=params["body"])
+
+    return response.json()

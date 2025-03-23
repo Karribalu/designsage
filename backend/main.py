@@ -3,13 +3,14 @@ import os
 from fastapi import FastAPI
 from dotenv import load_dotenv
 from openai import OpenAI
+from routes import webrtc
 load_dotenv()
 app = FastAPI(
     title="Design Sage",
     description="Design Sage is a tool that helps you design your website",
     version="0.1.0",
 )
-
+app.include_router(webrtc.router)
 openai_service = OpenAI(api_key=os.getenv(
     "OPENAI_API_KEY"), base_url="https://api.x.ai/v1")
 
