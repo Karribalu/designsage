@@ -3,7 +3,7 @@ import os
 from fastapi import FastAPI
 from dotenv import load_dotenv
 from openai import OpenAI
-from routes import webrtc
+from routers import webrtc
 load_dotenv()
 app = FastAPI(
     title="Design Sage",

@@ -30,6 +30,8 @@ interface IProps {
   questionId?: string;
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
+  handleCallStart?: () => void;
+  isCallStarted?: boolean;
 }
 
 /**
@@ -103,6 +105,16 @@ export const SideBar: FC<IProps> = (props) => {
                 ))}
               </div>
             </div>
+            {!props.isCallStarted && (
+              <Button
+                variant="default"
+                size="sm"
+                className="w-full cursor-pointer"
+                onClick={props.handleCallStart}
+              >
+                Start
+              </Button>
+            )}
           </div>
         )}
       </SidebarContent>

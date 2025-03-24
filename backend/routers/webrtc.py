@@ -10,7 +10,7 @@ router = APIRouter(
 
 @router.get("/")
 async def hello_world():
-    return {"message": "Hello World"}
+    return {"message": "Hello from WebRTC router"}
 
 
 @router.get("/ephimeral-token")
