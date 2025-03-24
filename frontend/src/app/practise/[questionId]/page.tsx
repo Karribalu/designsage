@@ -41,10 +41,9 @@ export const Practise: FC<IProps> = (props) => {
     pc.addTrack(ms.getTracks()[0]);
     // Set up data channel for sending and receiving events
     const dc = pc.createDataChannel("oai-events");
-    dc.addEventListener("message", (e) => {
-      // Realtime server events appear here!
-      console.log(e);
-    });
+    dc.onmessage = (e) => {
+      console.log("I am output ", e);
+    };
     // Start the session using the Session Description Protocol (SDP)
     const offer = await pc.createOffer();
     await pc.setLocalDescription(offer);
@@ -71,7 +70,7 @@ export const Practise: FC<IProps> = (props) => {
     setIsCallStarted(true);
     // setAudioSrc("/path/to/audio/file.mp3"); // Replace with actual audio source
     // Get the ephimeral token and establish the call conenction with open AI
-    fetch("/api/webrtc/ephimeral-token")
+    fetch("/api/webrtc/ephimeral-token?system_design=" + question?.title)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
