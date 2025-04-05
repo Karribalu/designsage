@@ -10,6 +10,14 @@ import {Edge, Node, useNodesState} from "@xyflow/react";
 import {ResizableEdgeData, ResizableNodeData} from "@/app-components/types";
 import {NODE_SIZES} from "@/constants";
 import mermaidUtility from "@/app-components/utils/mermaid-utility";
+import dynamic from "next/dynamic";
+const Excalidraw = dynamic(
+    async () => (await import("@excalidraw/excalidraw")).Excalidraw,
+    {
+        ssr: false,
+    },
+);
+
 
 interface IProps {
 }
@@ -240,7 +248,10 @@ export const Practise: FC<IProps> = (props) => {
                     isCallStarted={isCallStarted}
                 />
                 <div className="flex flex-col w-full">
-                    <CanvasComponent nodes={nodes} edges={edges} setNodes={setNodes} setEdges={setEdges}/>
+                    {/*<CanvasComponent nodes={nodes} edges={edges} setNodes={setNodes} setEdges={setEdges}/>*/}
+                    <div className="h-[95%] w-full mt-15">
+                    <Excalidraw />
+                    </div>
                     {isCallStarted && (
                         <CommunicationToolbar
                             questionName={question?.title}

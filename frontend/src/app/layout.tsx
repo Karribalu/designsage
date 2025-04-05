@@ -6,6 +6,7 @@ import { Provider } from "react-redux";
 import { store } from "@/store/store";
 import { Navbar } from "@/app-components/navbar/navbar";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import "@excalidraw/excalidraw/index.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
