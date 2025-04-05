@@ -6,6 +6,9 @@ import { ResizableNodeData } from "../types";
 // The edges are in the format of { id: string, source: string, target: string }
 const mermaidUtility = {
   convertToMermaid: (nodes: Node<ResizableNodeData>[], edges: Edge[]) => {
+    if(nodes.length === 0 && edges.length === 0) {
+        return null;
+    }
     let mermaid = "graph LR\n";
 
     // Add nodes

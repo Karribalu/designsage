@@ -32,55 +32,16 @@ import ResizableCylinder from "./resizable-nodes/cylinder";
 import {ResizableSquare} from "./resizable-nodes/square";
 
 interface IProps {
+    nodes: Node<ResizableNodeData>[];
+    setNodes: React.Dispatch<React.SetStateAction<Node<ResizableNodeData>[]>>;
+    edges: Edge[];
+    setEdges: React.Dispatch<React.SetStateAction<Edge[]>>;
 }
 
 /**
  * @author
  * @function @CanvasComponent
  **/
-const initialNodes: Node<ResizableNodeData>[] = [
-    {
-        id: "node_100",
-        position: {x: 0, y: 300},
-        data: {
-            label: "cylinder",
-            color: "#EBC347",
-            type: "cylinder",
-            ...NODE_SIZES["cylinder"],
-        },
-        type: "cylinder",
-    },
-    {
-        id: "node_101",
-        position: {x: 300, y: 300},
-        data: {
-            label: "cylinder",
-            color: "#EBC347",
-            type: "cylinder",
-            ...NODE_SIZES["cylinder"],
-        },
-        type: "cylinder",
-    },
-];
-const initialEdges: Edge<ResizableEdgeData>[] = [
-    {
-        id: "edge_100",
-        source: "node_100",
-        target: "node_101",
-        selected: true,
-        data: {
-            label: "label",
-            isEditing: false,
-            type: "forward",
-            color: "black",
-            style: "solid",
-            setSelected: (isSelected: boolean) => {
-                console.log("isSelected", isSelected);
-            },
-        },
-    },
-];
-
 // FIXME: This is a workaround to fix the type error
 const nodeTypes: NodeTypes = {
     circle: ResizableCircle,
@@ -98,10 +59,7 @@ let getNodeId = () => {
     i++;
     return `node_${i}`;
 };
-const CanvasComponent: FC<IProps> = (_) => {
-    const [nodes, setNodes] =
-        useNodesState<Node<ResizableNodeData>>(initialNodes);
-    const [edges, setEdges] = useState<Edge[]>(initialEdges);
+const CanvasComponent: FC<IProps> = ({nodes, setNodes, edges, setEdges}) => {
     const {nodeType} = useAppSelector((state) => state.nodeDrop);
     const [edgeSelection, setEdgeSelection] = useState<Edge | null>(null);
     const [edgeSelectionPosition, setEdgeSelectionPosition] = useState<{

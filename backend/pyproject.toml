@@ -5,6 +5,7 @@ description = "Backend for the Design Sage application"
 authors = [
     { name = "Balasubramanyam Karri", email = "karri.balu2339@gmail.com" },
 ]
+requires-python = ">=3.12"
 dependencies = [
     "dotenv>=0.9.9",
     "fastapi>=0.115.11",
